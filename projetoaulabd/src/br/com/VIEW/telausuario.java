@@ -80,11 +80,12 @@ public void limpar(){
         txtid = new javax.swing.JTextField();
         txtnomeusuario = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        btnsair = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtsenha = new javax.swing.JTextField();
         btninserir = new javax.swing.JButton();
+        btnapagar = new javax.swing.JButton();
+        btneditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,8 +105,6 @@ public void limpar(){
                 jButton1ActionPerformed(evt);
             }
         });
-
-        btnsair.setText("sair");
 
         jButton2.setText("limpar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -129,36 +128,51 @@ public void limpar(){
             }
         });
 
+        btnapagar.setText("deletar");
+        btnapagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnapagarActionPerformed(evt);
+            }
+        });
+
+        btneditar.setText("editar");
+        btneditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btneditarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnsair)
-                .addGap(39, 39, 39))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtnomeusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtnomeusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtsenha)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btninserir))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(btninserir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtsenha)))
-                .addContainerGap(63, Short.MAX_VALUE))
+                        .addComponent(btnapagar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btneditar)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,10 +193,10 @@ public void limpar(){
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(btninserir))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnsair)
-                .addGap(53, 53, 53))
+                    .addComponent(btninserir)
+                    .addComponent(btnapagar)
+                    .addComponent(btneditar))
+                .addGap(87, 87, 87))
         );
 
         pack();
@@ -240,8 +254,36 @@ objusuariodao.inserirusuario(objusuariodto);
             
 
 limpar();
+}
     }//GEN-LAST:event_btninserirActionPerformed
-    }
+
+    private void btnapagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnapagarActionPerformed
+ String id_usuario = txtid.getText();
+ usuariodto usuer = new usuariodto();
+ usuer.setId_usuario(Integer.parseInt(id_usuario));
+ usuariodao user = new usuariodao();
+ user.apagar(usuer);
+        
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnapagarActionPerformed
+
+    private void btneditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditarActionPerformed
+        String id_usuario = txtid.getText();
+        String login = txtnomeusuario.getText();
+        String senha = txtsenha.getText();
+
+        usuariodto objusuariodto = new usuariodto();
+        objusuariodto.setId_usuario(Integer.parseInt(id_usuario));
+        objusuariodto.setNomeusuario(login);
+        objusuariodto.setSenhausuario(senha);
+        
+        usuariodao objusuariodao = new usuariodao();
+        objusuariodao.editar(objusuariodto);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btneditarActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -278,15 +320,16 @@ limpar();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnapagar;
+    private javax.swing.JButton btneditar;
     private javax.swing.JButton btninserir;
-    private javax.swing.JButton btnsair;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField txtid;
-    private javax.swing.JTextField txtnomeusuario;
-    private javax.swing.JTextField txtsenha;
+    public static javax.swing.JTextField txtid;
+    public static javax.swing.JTextField txtnomeusuario;
+    public static javax.swing.JTextField txtsenha;
     // End of variables declaration//GEN-END:variables
 }

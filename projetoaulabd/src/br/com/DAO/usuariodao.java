@@ -39,7 +39,29 @@ public class usuariodao {
             }
         }
     }
-    
+   public void apagar(usuariodto objusuariodto){
+       String sql ="delete from tb_usuario where id_usuario = ?";
+   conexao = conexaodao.conector();
+       try {
+           pst = conexao.prepareStatement(sql);
+           pst.setInt(1, objusuariodto.getId_usuario());
+       int add = pst.executeUpdate();
+     
+       if (add > 0){
+           conexao.close();
+           JOptionPane.showMessageDialog(null,"coisa");
+           apagarcampos();
+       }
+       } catch (Exception e) {
+       
+       
+       
+       }
+   
+   
+   
+   
+   } 
     
     
 }
